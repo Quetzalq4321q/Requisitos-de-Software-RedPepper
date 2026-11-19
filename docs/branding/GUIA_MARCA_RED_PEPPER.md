@@ -70,10 +70,10 @@ Para evitar saturación cromática y garantizar lectura cómoda en mesas y cajas
 | `#FFFFFF` sobre `#F64301` | `3.67 : 1` | Solo texto grande / iconos | **Prohibido** para texto pequeño; usar `#1C1917` encima o `#C23500` sobre blanco. |
 
 ## 9. Dosificación Cromática (Regla 60-30-10)
-- **70 %** Neutros cálidos (`#FAF8F5`, `#FFFFFF`, `#F4F1EC`).
-- **20 %** Tinta y estructura (`#1C1917`, `#57534E`, `#E4DFD6`).
-- **10 %** Acentos oficiales (`#FF3131` / `#D91B1B` para acción primaria, `#F64301` para destacados y `#1F6636` para confirmaciones/frescura).
+- **Versión Blanca (`[data-theme="light"]`):** Alabastro `#FAF8F5`, superficie `#FFFFFF`, piedra `#F4F1EC`, carbón cálido `#1C1917`, CTA rojo `#D91B1B` (`5.09 : 1` AA).
+- **Versión Oscura (`[data-theme="dark"]`):** Carbón profundo `#11100E` (nunca negro puro `#000000`), superficie cálida `#1B1916`, elevado `#24211D`, tinta `#F5F2EC` (`17.02 : 1` AAA), CTA rojo `#DC2626` (`4.83 : 1` AA), tinta roja `#FF6B6B` (`6.45 : 1` AA) y verde `#4ADE80` (`8.90 : 1` AA).
 - **Regla anti-saturación:** nunca combinar simultáneamente los tres colores oficiales en una misma tarjeta de producto o fila de tabla.
+- **Arquitectura en 3 Subgrupos:** (1) Experiencia Cliente modelo PedidosYa (`Celular / Web`); (2) Operaciones Mostrador Square POS + Cocina KDS Toast (`Tablet / Monitor`); (3) Administración Backoffice NIIF 18 + SUNAT + Marca (`PC`).
 
 ## 10. Tipografía Oficial y Jerarquía
 - **Familia principal:** `Source Sans 3` (respaldo limpio `Inter`, `Segoe UI`, `system-ui`).

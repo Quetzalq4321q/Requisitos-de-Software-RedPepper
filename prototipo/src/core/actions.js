@@ -56,10 +56,27 @@
     RP.store.notify();
   }
 
+  function toggleTheme(nextTheme) {
+    const st = RP.store.getState();
+    const resolved = nextTheme === "dark" || nextTheme === "light"
+      ? nextTheme
+      : st.theme === "dark"
+      ? "light"
+      : "dark";
+    st.theme = resolved;
+    document.documentElement.setAttribute("data-theme", resolved);
+    RP.store.notify();
+  }
+
   function applyLegacyOrUrlParams() {
     const params = new URLSearchParams(global.location.search);
     if (params.get("capture") === "1") {
       document.documentElement.classList.add("no-anim");
+    }
+    const themeParam = params.get("theme");
+    if (themeParam === "dark" || themeParam === "light") {
+      RP.store.getState().theme = themeParam;
+      document.documentElement.setAttribute("data-theme", themeParam);
     }
     const legacyView = params.get("view");
     const appParam = params.get("app");
@@ -467,6 +484,7 @@
     LEGACY_VIEW_MAP,
     showToast,
     navigate,
+    toggleTheme,
     applyLegacyOrUrlParams,
     getEffectiveWorkingDaysCount,
     computeDailyMetrics,

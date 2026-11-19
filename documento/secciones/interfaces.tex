@@ -9,31 +9,12 @@
 \section{Interfaces de usuario}
 \label{sec:interfaces}
 
-\noindent{\small\textbf{Versión 3} \textperiodcentered{} plataforma web modular implementada en \texttt{prototipo/} (\texttt{core/}, \texttt{components/} y \texttt{apps/} sin dependencias externas) con identidad oficial \textbf{RED PEPPER — Sánguches, Salchipapas \& Más}, sujeta a validación final con el interesado.}\par\vspace{0.5em}
+\noindent{\small\textbf{Versión 4} \textperiodcentered{} plataforma web modular implementada en \texttt{prototipo/} (\texttt{core/}, \texttt{components/} y \texttt{apps/} sin dependencias externas) con identidad oficial \textbf{RED PEPPER — Sánguches, Salchipapas \& Más}, sujeta a validación final con el interesado.}\par\vspace{0.5em}
 
-En esta versión se reorganiza el prototipo en \textbf{subaplicaciones
-desacopladas} que separan la \textbf{experiencia pública del cliente}
-(navegación limpia de cuatro destinos, fotografía gastronómica en formato
-WebP y seguimiento en vivo) de los \textbf{portales internos del equipo}
-(\textbf{mostrador POS}, \textbf{cocina KDS}, \textbf{gerencia / NIIF 18} y
-\textbf{guía de marca interna}). Todos los componentes consumen tokens
-centralizados en \texttt{prototipo/src/styles/tokens.css} con la paleta
-oficial Rojo Brillante (\texttt{\#FF3131}), Naranja Vivo (\texttt{\#F64301})
-y Verde Oscuro (\texttt{\#1F6636}), calibrada para cumplir contraste WCAG 2.2 AA
-(\texttt{\#D91B1B} en botones primarios con texto blanco, \texttt{\#1F6636} en
-disponibilidad y estados listos), cifras tabulares monoespaciadas y modales
-accesibles en lugar de diálogos nativos del navegador.
+En esta versión se reorganiza el prototipo aplicando el sistema de diseño \textbf{Stitch} (\texttt{.stitch/DESIGN.md}) en \textbf{tres subgrupos operativos} diferenciados por dispositivo (\textbf{Celular}, \textbf{Tablet} y \textbf{PC}) y provistos con doble apariencia \textbf{Versión Blanca} (\texttt{\#FAF8F5}) y \textbf{Versión Oscura} (\texttt{\#11100E}): (1)~\textbf{Subgrupo 1 — Experiencia Cliente} (modelo \emph{PedidosYa}: lista compacta y barra inferior de carrito en celular, catálogo 3 columnas con portada editorial en PC); (2)~\textbf{Subgrupo 2 — Operaciones en Tienda} (mostrador \textbf{POS táctil $\ge 48$\,px} con calculadora de vuelto y selector móvil \emph{Carta\,|\,Comanda}, más tablero \textbf{Cocina KDS} de 3 columnas con línea de urgencia y bloqueo rápido de stock); y (3)~\textbf{Subgrupo 3 — Administración y Marca} (\emph{backoffice} PC con riel lateral, prorrateo P-14, NIIF 18, visor modal de comprobantes SUNAT y estudio interno de marca). Todos los tokens cumplen contraste WCAG 2.2 AA en ambos temas.
 
-\paragraph{Evolución respecto a las versiones anteriores.} Respecto a v1 y v2,
-la v3 incorpora: (i) separación estricta entre la barra pública del comensal
-y el acceso interno del personal; (ii) reducción de saturación visual a un
-máximo de cuatro acciones principales por barra y revelación progresiva en
-detalles de plato y costos indirectos; (iii) verificación automatizada de
-responsividad desde 320\,px hasta 1920\,px (\texttt{scripts/qa\_verify.mjs})
-con objetivos táctiles mínimos de 44\,px / 48\,px en POS; y (iv) documentación
-técnica trazable en \texttt{docs/}. Los importes iniciales corresponden a un
-escenario de demostración local y no sustituyen un backend transaccional ni
-registros contables reales.
+\paragraph{Evolución respecto a las versiones anteriores.} Respecto a v1--v3,
+la v4 incorpora: (i)~estructuración explícita en 3 subgrupos con flujos reales por tipo de dispositivo; (ii)~conmutación instantánea entre Versión Blanca y Versión Oscura (\texttt{?theme=light|dark}); (iii)~herramientas operativas reales (calculadora de vuelto rápido POS, modal de comprobante SUNAT y barras proporcionales por canal); y (iv)~suite automatizada \texttt{scripts/qa\_verify.mjs} aprobando 70 combinaciones vista $\times$ tema $\times$ resolución (320\,px a 1920\,px), WCAG 2.2 AA y 4 pruebas E2E, junto con capturas separadas en \texttt{interfaces/celular/}, \texttt{interfaces/tablet/} y \texttt{interfaces/pc/}. Los importes iniciales corresponden a un escenario de demostración local y no sustituyen registros reales.
 
 \subsection{Lado del cliente y atención en mostrador}
 \label{subsec:interfaces-cliente-pos}

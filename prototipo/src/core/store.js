@@ -8,9 +8,12 @@
   const LEGACY_KEY = "redpepper_erp_v2_state";
 
   const INITIAL_STATE = {
+    theme: "light",           // light | dark
     activeApp: "cliente",     // cliente | pos | cocina | admin | marca
-    activeTab: "carta",       // subvista dentro del portal activo
+    activeTab: "carta",       // subvista dentro del subgrupo activo
     activeRole: "ACT-0005 · Cliente",
+    posMobileTab: "catalogo", // catalogo | comanda (solo vista móvil POS)
+    posCashGiven: 0,
     jornadaAbierta: true,
     jornadaInicio: "11:00",
     jornadaFin: "23:00",

@@ -1,18 +1,20 @@
 /* =====================================================================
-   RED PEPPER — Sistema Centralizado de Design Tokens
-   Personalidad: Enérgica, moderna, apetitosa, cercana y gastronómica.
-   Todos los colores interactivos han sido auditados bajo WCAG 2.2 AA.
+   RED PEPPER — Sistema Centralizado de Design Tokens (Claro + Oscuro)
+   Oficial: #FF3131 | #F64301 | #1F6636 — Auditado WCAG 2.2 AA (>= 4.5:1)
    ===================================================================== */
 
-:root {
-  /* --- Identidad Oficial Obligatoria --- */
-  --brand-red: #FF3131;          /* Rojo brillante: marca, emblema, acento visual grande */
-  --brand-orange: #F64301;       /* Naranja vivo: promociones, destacados, energía cálida */
-  --brand-green: #1F6636;        /* Verde oscuro: identidad secundaria, disponibilidad, frescura */
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
 
-  /* --- Derivados Accesibles (WCAG 2.2 AA >= 4.5:1 para texto normal) --- */
+  /* --- Identidad Oficial Obligatoria --- */
+  --brand-red: #FF3131;
+  --brand-orange: #F64301;
+  --brand-green: #1F6636;
+
+  /* --- Derivados Accesibles Modo Claro (Alabastro Cálido) --- */
   --brand-red-cta: #D91B1B;      /* Blanco #FFF sobre #D91B1B = 5.09:1 (AA) */
-  --brand-red-hover: #C41818;    /* Blanco #FFF sobre #C41818 = 6.02:1 (AA) */
+  --brand-red-hover: #C41818;
   --brand-red-ink: #B91C1C;      /* #B91C1C sobre #FFF = 6.47:1 (AA) */
   --brand-red-soft: #FEF2F2;
   --brand-red-border: #FECACA;
@@ -21,31 +23,36 @@
   --brand-orange-soft: #FFF4ED;
   --brand-orange-border: #FED7AA;
 
+  --brand-green-cta: #1F6636;    /* Blanco #FFF sobre #1F6636 = 6.97:1 (AA) */
   --brand-green-hover: #174E29;
-  --brand-green-soft: #ECF7EF;   /* #1F6636 sobre #ECF7EF = 6.35:1 (AA) */
+  --brand-green-ink: #1F6636;
+  --brand-green-soft: #ECF7EF;
   --brand-green-border: #BBF7D0;
 
-  /* --- Superficies y Neutros Cálidos (sin negro puro #000000) --- */
-  --color-bg: #FAF8F5;           /* Alabastro cálido de descanso visual */
-  --color-surface: #FFFFFF;      /* Tarjetas, paneles y formularios */
+  /* --- Superficies y Neutros Cálidos --- */
+  --color-bg: #FAF8F5;
+  --color-surface: #FFFFFF;
   --color-surface-subtle: #F4F1EC;
   --color-surface-inset: #EAE5DC;
-  --color-surface-dark: #1C1917; /* Carbón cálido para cierres y contraste alto */
+  --color-surface-elevated: #FFFFFF;
+  --color-surface-dark: #1C1917;
+  --color-chip-active-bg: #1C1917;
+  --color-chip-active-fg: #FFFFFF;
 
-  /* --- Tipografía / Tinta y Bordes --- */
-  --color-text: #1C1917;         /* 16.50:1 sobre #FAF8F5 */
-  --color-text-secondary: #57534E; /* 7.20:1 sobre #FAF8F5 */
-  --color-text-muted: #6E6862;   /* 5.20:1 sobre #FFFFFF */
+  /* --- Tinta y Bordes --- */
+  --color-text: #1C1917;
+  --color-text-secondary: #57534E;
+  --color-text-muted: #6E6862;
   --color-border: #E4DFD6;
   --color-border-strong: #CCC5B9;
 
   /* --- Estados Funcionales --- */
   --status-ok-bg: var(--brand-green-soft);
-  --status-ok-ink: var(--brand-green);
+  --status-ok-ink: var(--brand-green-ink);
   --status-ok-border: var(--brand-green-border);
 
   --status-warn-bg: #FEF3C7;
-  --status-warn-ink: #92400E;    /* >= 7.0:1 sobre #FEF3C7 */
+  --status-warn-ink: #92400E;
   --status-warn-border: #FCD34D;
 
   --status-danger-bg: var(--brand-red-soft);
@@ -53,14 +60,14 @@
   --status-danger-border: var(--brand-red-border);
 
   /* --- Tipografía --- */
-  --font-sans: "Source Sans 3", "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-sans: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 
-  --text-xs: 0.75rem;    /* 12px */
-  --text-sm: 0.875rem;   /* 14px */
-  --text-base: 0.9375rem;/* 15px */
-  --text-lg: 1.125rem;   /* 18px */
-  --text-xl: 1.375rem;   /* 22px */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 0.9375rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
   --text-2xl: clamp(1.35rem, 2.2vw, 1.85rem);
 
   /* --- Espaciado (base 4px) --- */
@@ -79,16 +86,73 @@
   --radius-pill: 999px;
 
   --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.05);
-  --shadow-md: 0 6px 18px rgba(28, 25, 23, 0.08);
+  --shadow-md: 0 8px 20px rgba(28, 25, 23, 0.08);
   --shadow-lg: 0 18px 40px rgba(28, 25, 23, 0.16);
 
   --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
   --focus-ring: 2px solid var(--brand-red-cta);
 
-  /* --- Layout & Breakpoints de referencia ---
-     Móvil pequeño: 320px | Móvil: 480px | Tablet: 768px | Desktop: 1024px | Wide: 1360px
-  --------------------------------------------- */
-  --container-max: 1320px;
+  --container-max: 1360px;
   --touch-min: 44px;
   --touch-pos: 48px;
+}
+
+/* =====================================================================
+   MODO OSCURO — Carbón Cálido Gastronómico (WCAG 2.2 AA Verificado)
+   Sin #000000 puro ni neones violetas; calibrado para KDS nocturno/app.
+   ===================================================================== */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --brand-red-cta: #DC2626;      /* Blanco #FFF sobre #DC2626 = 4.83:1 (AA) */
+  --brand-red-hover: #EF4444;
+  --brand-red-ink: #FF6B6B;      /* #FF6B6B sobre #1B1916 = 6.45:1 (AA) */
+  --brand-red-soft: rgba(255, 49, 49, 0.15);
+  --brand-red-border: rgba(255, 107, 107, 0.36);
+
+  --brand-orange-ink: #FF8547;   /* #FF8547 sobre #1B1916 = 7.10:1 (AA) */
+  --brand-orange-soft: rgba(246, 67, 1, 0.18);
+  --brand-orange-border: rgba(255, 133, 71, 0.38);
+
+  --brand-green-cta: #1F6636;    /* Blanco #FFF sobre #1F6636 = 6.97:1 (AA) */
+  --brand-green-hover: #277E43;
+  --brand-green-ink: #4ADE80;    /* #4ADE80 sobre #1B1916 = 8.90:1 (AA/AAA) */
+  --brand-green-soft: rgba(31, 102, 54, 0.34);
+  --brand-green-border: rgba(74, 222, 128, 0.38);
+
+  /* --- Superficies Carbón Cálido --- */
+  --color-bg: #11100E;
+  --color-surface: #1B1916;
+  --color-surface-subtle: #24211D;
+  --color-surface-inset: #2E2A25;
+  --color-surface-elevated: #221F1B;
+  --color-surface-dark: #141210;
+  --color-chip-active-bg: #F5F2EC;
+  --color-chip-active-fg: #1C1917;
+
+  /* --- Tinta y Bordes --- */
+  --color-text: #F5F2EC;           /* 15.6:1 sobre #1B1916 */
+  --color-text-secondary: #C0B8AC; /* 7.8:1 sobre #1B1916 */
+  --color-text-muted: #9E9589;     /* 5.1:1 sobre #1B1916 */
+  --color-border: #35302A;
+  --color-border-strong: #4A433B;
+
+  /* --- Estados Funcionales en Oscuro --- */
+  --status-ok-bg: rgba(31, 102, 54, 0.34);
+  --status-ok-ink: #4ADE80;
+  --status-ok-border: rgba(74, 222, 128, 0.38);
+
+  --status-warn-bg: rgba(245, 158, 11, 0.16);
+  --status-warn-ink: #FCD34D;
+  --status-warn-border: rgba(252, 211, 77, 0.36);
+
+  --status-danger-bg: rgba(255, 49, 49, 0.16);
+  --status-danger-ink: #FF6B6B;
+  --status-danger-border: rgba(255, 107, 107, 0.38);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.32);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.44);
+  --shadow-lg: 0 20px 44px rgba(0, 0, 0, 0.62);
+
+  --focus-ring: 2px solid #FF6B6B;
 }

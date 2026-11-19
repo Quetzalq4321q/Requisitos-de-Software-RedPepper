@@ -147,9 +147,9 @@
         </div>
       </div>
 
-      <div class="split-pos">
+      <div class="split-pos client-layout">
         <div class="dish-grid">${cardsHtml}</div>
-        <aside style="display:flex; flex-direction:column; gap:16px;" aria-label="Resumen rápido">
+        <aside class="client-aside-cart" style="display:flex; flex-direction:column; gap:16px;" aria-label="Resumen rápido">
           ${renderCartCard(st, true)}
           ${
             activeTracker
@@ -164,6 +164,14 @@
           }
         </aside>
       </div>
+      ${
+        st.clientCart.length
+          ? `<button type="button" class="mobile-sticky-cart" id="btn-mobile-cart-jump" aria-label="Ir a Tu Pedido">
+              <span><strong>${st.clientCart.reduce((s, l) => s + l.qty, 0)}</strong> ítem(s) en tu pedido</span>
+              <strong class="mono">${RP.format.money(st.clientCart.reduce((s, l) => s + l.precio * l.qty, 0))} · Ver →</strong>
+            </button>`
+          : ""
+      }
     `;
   }
 
@@ -413,6 +421,7 @@
       RP.actions.confirmOrder("client", note);
     });
     container.querySelector("[data-go-carta]")?.addEventListener("click", () => RP.actions.navigate("cliente", "carta"));
+    container.querySelector("#btn-mobile-cart-jump")?.addEventListener("click", () => RP.actions.navigate("cliente", "pedido"));
   }
 
   RP.apps = RP.apps || {};

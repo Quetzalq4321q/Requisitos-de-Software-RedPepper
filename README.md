@@ -77,9 +77,12 @@ no se rompen.
 │   ├── assets/                    # Logotipos SVG + fotografías gastronómicas WebP
 │   └── src/                       # styles/, core/, components/ y apps/
 ├── scripts/
-│   └── qa_verify.mjs              # Suite Chromium CDP multi-viewport, WCAG AA y E2E
-├── interfaces/                    # Capturas actualizadas del prototipo (v3)
+│   └── qa_verify.mjs              # Suite Chromium CDP (70 checks Dual Theme + WCAG AA + 4 E2E)
+├── interfaces/                    # Capturas del prototipo (v4 Dual Theme y por dispositivo)
 │   ├── fuentes/                   # Capturas originales v1 conservadas como referencia
+│   ├── celular/                   # Subgrupos en móvil (390×844 Blanca & Oscura)
+│   ├── tablet/                    # Subgrupos en tablet (768×1024 Blanca & Oscura)
+│   ├── pc/                        # Subgrupos en PC/KDS/Backoffice (1440×900/960)
 │   ├── 01-cliente-carta-pedido.png
 │   ├── 02-pos-mostrador.png
 │   ├── 03-cocina-comandas.png

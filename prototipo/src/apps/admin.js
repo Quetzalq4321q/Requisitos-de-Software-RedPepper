@@ -1,9 +1,34 @@
 /* =====================================================================
-   RED PEPPER — Subaplicación Gerencial & Contable (4 Sub-vistas limpias)
-   Margen P-14 | Compras y Carta | Contabilidad NIIF 18 | Configuración
+   RED PEPPER — Subgrupo 3A: Administración, P-14 & NIIF 18 / SUNAT
+   Modelo PC Backoffice (Alegra / Toast Web): Sidebar rail + KPIs + Gráficas
+   Tablet: Tabs horizontales | Celular: Resumen 2×2 sin barra lateral
    ===================================================================== */
 (function (global) {
   const RP = (global.RP = global.RP || {});
+
+  function renderSidebarRail(st) {
+    const links = [
+      { tab: "margen", label: "Margen Bruto P-14" },
+      { tab: "compras", label: "Compras y Carta" },
+      { tab: "contabilidad", label: "NIIF 18 y SUNAT" },
+      { tab: "config", label: "Configuración" },
+    ];
+    return `
+      <aside class="admin-rail" aria-label="Secciones de administración">
+        <div class="admin-rail-title">Backoffice Gerencial</div>
+        <div class="admin-rail-list">
+          ${links
+            .map(
+              (l) => `<button type="button" class="admin-rail-btn ${st.activeTab === l.tab ? "active" : ""}" data-admin-rail="${l.tab}">${l.label}</button>`
+            )
+            .join("")}
+        </div>
+        <div class="admin-rail-footer">
+          <button type="button" class="btn btn-ghost btn-full" data-go-brand="1">Estudio de Marca</button>
+        </div>
+      </aside>
+    `;
+  }
 
   function renderMargen(st) {
     const esc = RP.format.escapeHtml;
@@ -71,20 +96,24 @@
       <div class="grid-2">
         <div class="card">
           <div class="card-head"><h2 class="card-title">Ventas por Canal</h2></div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Canal</th><th class="num">Pedidos</th><th class="num">Importe</th><th class="num">%</th></tr></thead>
-              <tbody>
-                ${channels
-                  .map((ch) => {
-                    const list = st.orders.filter((o) => o.canal === ch);
-                    const sum = list.reduce((s, o) => s + o.total, 0);
-                    const pct = m.ventasHoy > 0 ? (sum / m.ventasHoy) * 100 : 0;
-                    return `<tr><td>${esc(ch)}</td><td class="num">${list.length}</td><td class="num">${RP.format.money(sum)}</td><td class="num">${pct.toFixed(1)}%</td></tr>`;
-                  })
-                  .join("")}
-              </tbody>
-            </table>
+          <div class="channel-bars">
+            ${channels
+              .map((ch) => {
+                const list = st.orders.filter((o) => o.canal === ch);
+                const sum = list.reduce((s, o) => s + o.total, 0);
+                const pct = m.ventasHoy > 0 ? (sum / m.ventasHoy) * 100 : 0;
+                return `
+                <div class="channel-bar-item">
+                  <div class="channel-bar-head">
+                    <span><strong>${esc(ch)}</strong> (${list.length} ped.)</span>
+                    <span class="mono">${RP.format.money(sum)} · ${pct.toFixed(1)}%</span>
+                  </div>
+                  <div class="channel-bar-track">
+                    <div class="channel-bar-fill" style="width:${Math.min(100, pct).toFixed(1)}%;"></div>
+                  </div>
+                </div>`;
+              })
+              .join("")}
           </div>
         </div>
 
@@ -324,7 +353,7 @@
             </div>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>RUC · Proveedor</th><th>Archivo · Hash SHA-256</th><th class="num">Monto</th></tr></thead>
+                <thead><tr><th>RUC · Proveedor</th><th>Archivo · SHA-256</th><th class="num">Monto</th><th></th></tr></thead>
                 <tbody>
                   ${sunatRows
                     .map(
@@ -332,6 +361,7 @@
                         <td><span class="mono">${esc(p.ruc)}</span> · ${esc(p.proveedor)}</td>
                         <td class="mono">${esc(p.comprobante)} · ${esc(p.sha256)}</td>
                         <td class="num">${RP.format.money(p.monto)}</td>
+                        <td style="text-align:right;"><button type="button" class="btn btn-ghost" data-view-sunat="${esc(p.id)}">${RP.ui.ICONS.receipt}</button></td>
                       </tr>`
                     )
                     .join("")}
@@ -350,9 +380,9 @@
       <div class="view-header">
         <div>
           <h1>Configuración y Alcance Operativo</h1>
-          <p class="view-sub">Parámetros locales del turno, identidad visual y frontera frontend / backend</p>
+          <p class="view-sub">Parámetros del turno, identidad visual y frontera frontend / backend</p>
         </div>
-        <button type="button" class="btn btn-orange" id="btn-open-brand-guide">Abrir Guía de Marca Interna</button>
+        <button type="button" class="btn btn-orange" id="btn-open-brand-guide">Abrir Estudio de Marca</button>
       </div>
       <div class="grid-2">
         <div class="card">
@@ -375,7 +405,7 @@
         <div class="card">
           <div class="card-head"><h2 class="card-title">Estado de Arquitectura (Frontend vs Backend)</h2></div>
           <ul class="kds-items" style="margin:0;">
-            <li><strong>Operativo en navegador:</strong> Carta WebP, carrito, POS ≥ 48 px, KDS, stock instantáneo, P-14, NIIF 18 borrador, modales accesibles y export CSV.</li>
+            <li><strong>Operativo en navegador:</strong> Carta WebP, carrito, POS ≥ 48 px, KDS, stock instantáneo, P-14, NIIF 18 borrador, dual tema Claro/Oscuro y export CSV.</li>
             <li><strong>Simulado para demo (requiere servidor futuro):</strong> Autenticación JWT RBAC (RNF-01), persistencia multiusuario en BD, envío OSE SUNAT y bóveda cifrada real (RNF-08).</li>
           </ul>
           <div style="margin-top:14px;">
@@ -387,19 +417,32 @@
   }
 
   function render(container, st) {
+    let mainHtml = "";
     if (st.activeTab === "compras") {
-      container.innerHTML = renderCompras(st);
+      mainHtml = renderCompras(st);
     } else if (st.activeTab === "contabilidad") {
-      container.innerHTML = renderContabilidad(st);
+      mainHtml = renderContabilidad(st);
     } else if (st.activeTab === "config") {
-      container.innerHTML = renderConfig(st);
+      mainHtml = renderConfig(st);
     } else {
-      container.innerHTML = renderMargen(st);
+      mainHtml = renderMargen(st);
     }
+
+    container.innerHTML = `
+      <div class="admin-shell">
+        ${renderSidebarRail(st)}
+        <div class="admin-workspace">${mainHtml}</div>
+      </div>
+    `;
     bindEvents(container, st);
   }
 
   function bindEvents(container, st) {
+    container.querySelectorAll("[data-admin-rail]").forEach((b) =>
+      b.addEventListener("click", () => RP.actions.navigate("admin", b.dataset.adminRail))
+    );
+    container.querySelector("[data-go-brand]")?.addEventListener("click", () => RP.actions.navigate("marca", "guia"));
+
     container.querySelector("#btn-export-csv")?.addEventListener("click", RP.actions.exportCsvReport);
     container.querySelectorAll("[data-toggle-day]").forEach((b) =>
       b.addEventListener("click", () => RP.actions.toggleWorkingDay(b.dataset.toggleDay))
@@ -433,6 +476,33 @@
           ],
           submitLabel: "Guardar Corrección",
           onSubmit: (data) => RP.actions.correctPurchaseAmount(p.id, data.monto, data.motivo),
+        });
+      })
+    );
+
+    container.querySelectorAll("[data-view-sunat]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        const p = st.purchases.find((x) => x.id === btn.dataset.viewSunat);
+        if (!p) return;
+        const esc = RP.format.escapeHtml;
+        RP.modal.openModal({
+          title: `Comprobante SUNAT — ${p.comprobante}`,
+          bodyHtml: `
+            <div class="cascade-list" style="margin-bottom:14px;">
+              <div class="cascade-row"><span>Proveedor</span><strong>${esc(p.proveedor)}</strong></div>
+              <div class="cascade-row"><span>RUC Emisor</span><span class="mono">${esc(p.ruc)}</span></div>
+              <div class="cascade-row"><span>Fecha emisión</span><span class="mono">${esc(p.fecha)}</span></div>
+              <div class="cascade-row"><span>Integridad SHA-256</span><span class="mono">${esc(p.sha256)}</span></div>
+              <div class="cascade-row total"><span>Importe registrado</span><span class="num">${RP.format.money(p.monto)}</span></div>
+            </div>
+            <p class="view-sub">Vista previa simulada de bóveda SUNAT; la custodia cifrada real reside en backend (RNF-08).</p>
+            <div class="modal-actions">
+              <button type="button" class="btn btn-primary" id="btn-close-sunat">Cerrar</button>
+            </div>
+          `,
+          onMount(dialog, close) {
+            dialog.querySelector("#btn-close-sunat")?.addEventListener("click", close);
+          },
         });
       })
     );

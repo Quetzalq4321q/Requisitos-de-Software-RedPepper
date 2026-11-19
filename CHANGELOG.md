@@ -4,6 +4,17 @@ Este archivo documenta los cambios mayores realizados sobre la plataforma **RED 
 
 ---
 
+## [v4 · 3 Subgrupos + Dual Theme + Dispositivos] — Reorganización con Stitch (`feat/redpepper-v3-completo`)
+**Qué se agrega / modifica:**
+- Reorganización integral siguiendo `.stitch/DESIGN.md` (`taste-design`, `stitch-extract-design-md`, `enhance-prompt`) en **3 Subgrupos operativos** modelados sobre flujos reales de restauración y separados para **Celular (`<640px`)**, **Tablet (`640–1099px`)** y **PC (`>=1100px`)**:
+  1. **Subgrupo 1 · Experiencia Cliente (`cliente.js`):** en móvil sigue el patrón *PedidosYa / Uber Eats* (lista horizontal `96×96`, chips deslizantes en fila única, barra inferior fija y barra flotante `Ver ->`); en PC usa portada editorial asimétrica, grilla 3 columnas y resumen persistente.
+  2. **Subgrupo 2 · Operaciones en Tienda (`pos.js` + `cocina.js`):** mostrador **Square POS** con franjas de color por categoría, objetivos `>=48px`, calculadora rápida de efectivo y vuelto (`Exacto / S/ 20 / S/ 50 / S/ 100`) y pestañas móviles `Carta | Comanda`; tablero **Toast KDS** de 3 columnas con líneas de urgencia, contadores de cola, botón rápido de modo nocturno/día y cajón **Stock 86'd**.
+  3. **Subgrupo 3 · Administración & Marca (`admin.js` + `brand-guide.js`):** riel lateral dedicado en PC (`.admin-rail`), gráfica proporcional de ventas por canal, cascada NIIF 18, visor modal de comprobantes SUNAT (`#btn-view-sunat`) y estudio de marca comparando ambas versiones cromáticas.
+- **Versión Blanca (`[data-theme="light"]`, `#FAF8F5`) y Versión Oscura (`[data-theme="dark"]`, `#11100E`)** con conmutador en cabecera (`#btn-theme-toggle`), `?theme=light|dark`, cambio dinámico de logotipo SVG y contraste WCAG 2.2 AA verificado en vivo (`5.09:1` / `4.83:1` CTA; `16.50:1` / `17.02:1` titular).
+- **QA y Evidencia por Dispositivo:** `scripts/qa_verify.mjs` verifica **70 / 70** combinaciones vista × tema × viewport (`320px–1920px`), `0` errores, `4` flujos E2E y exporta capturas separadas en `interfaces/celular/`, `interfaces/tablet/` e `interfaces/pc/` junto con la recompilación LaTeX.
+
+---
+
 ## [PR 5/5] — Vectorización del Logotipo Oficial y Adaptación de Fotografías Referenciales (`feat/pr-05-logo-activos-reales`)
 **Qué se agrega / modifica:**
 - Vectorización fiel a curvas Bézier cúbicas (SVG escalable) del logotipo circular oficial de **RED PEPPER — Sánguches - Salchipapas & Más**, conservando su fondo verde `#1F6636`, aro blanco, rotulación apilada en rojo `#FF3131` con contorno blanco tipo *sticker* y descriptor original:

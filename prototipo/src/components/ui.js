@@ -10,6 +10,18 @@
     cart: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 2.5h2l1.4 7.2h7.1l1.2-5H4.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.2" cy="13" r="1.1" fill="currentColor"/><circle cx="11.8" cy="13" r="1.1" fill="currentColor"/></svg>`,
     clock: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.7"/><path d="M8 4.8V8l2.2 1.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>`,
     pin: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 14s4.5-4.1 4.5-7.6A4.5 4.5 0 003.5 6.4C3.5 9.9 8 14 8 14z" stroke="currentColor" stroke-width="1.7"/><circle cx="8" cy="6.4" r="1.5" fill="currentColor"/></svg>`,
+    sun: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+    moon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 9.8A5.8 5.8 0 016.2 2.5a5.8 5.8 0 107.3 7.3z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    layers: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2L2 5.2 8 8.4l6-3.2L8 2zM2 8.2l6 3.2 6-3.2M2 11.2l6 3.2 6-3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    receipt: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 2h8v12l-2-1.2L8 14l-2-1.2L4 14V2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 5.5h4M6 8h4M6 10.5h2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  };
+
+  const SUBGROUPS = {
+    cliente: { id: "SG-1", name: "Subgrupo 1 · Cliente", device: "Celular / Web" },
+    pos: { id: "SG-2", name: "Subgrupo 2 · Operaciones en Tienda", device: "Tablet / Caja POS" },
+    cocina: { id: "SG-2", name: "Subgrupo 2 · Operaciones en Tienda", device: "Monitor / Tablet KDS" },
+    admin: { id: "SG-3", name: "Subgrupo 3 · Administración & NIIF 18", device: "PC / Backoffice" },
+    marca: { id: "SG-3", name: "Subgrupo 3 · Administración & Marca", device: "PC / Estudio de Diseño" },
   };
 
   function statusPill(text, tone = "neutral", live = false) {
@@ -39,6 +51,7 @@
 
   RP.ui = {
     ICONS,
+    SUBGROUPS,
     statusPill,
     emptyState,
   };
